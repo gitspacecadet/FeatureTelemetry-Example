@@ -15,25 +15,44 @@ page 50101 "ACH Payment Form"
             {
                 Caption = 'Payment Amount';
                 ApplicationArea = All;
-                trigger OnValidate()
+            }
+        }
+
+    }
+    actions
+    {
+        area(Processing)
+        {
+            action(Pay)
+            {
+                ApplicationArea = All;
+                Caption = 'Pay';
+                Promoted = true;
+                PromotedIsBig = true;
+                Image = Payment;
+
+                trigger OnAction()
                 begin
                     if (PaymentAmount < 1) or (PaymentAmount > OriginalPaymentAmount) then
                         Error(PaymentAmountError);
                 end;
-
             }
         }
     }
+
+
     var
 
 
         PstSalesInvoice: Record "Sales Invoice Header";
+
+        SalesHeader: Record "Sales Header";
         PaymentAmount: Decimal;
         OriginalPaymentAmount: Decimal;
         PaymentAmountError: Label 'Payment Amount could not be more than invoice remaining amount or less than 1.';
 
 
-    procedure SetParameters(InvNo: Code[20]; CustomerNo: Code[20])
+    procedure SetParameters(InvNo: Code[20])
     // Sets the default parameters for the page
     begin
         PstSalesInvoice.Get(InvNo);
@@ -46,25 +65,8 @@ page 50101 "ACH Payment Form"
     // Sets the default parameters for the page
     begin
         SalesHeader.Get(DocType, SalesHeaderNo);
-
-        OriginalPaymentAmount := SalesHeader.SquareGetMaxPaymentAmount(SalesHeader);
+        OriginalPaymentAmount := SalesHeader.SquareGetMaxPaymentAmount();
         PaymentAmount := OriginalPaymentAmount;
     end;
 
-    procedure SquareGetMaxPaymentAmount(var Rec: Record "Sales Header"): Decimal
-    // Returns maximum available amount for payment
-    var
-        TotalSalesLine: Record "Sales Line";
-        OutstandingAmount: Decimal;
-    begin
-        // Calculate Sales Document Outstanding Amount
-        TotalSalesLine.SetRange("Document Type", Rec."Document Type");
-        TotalSalesLine.SetRange("Document No.", Rec."No.");
-        if TotalSalesLine.Findset() then begin
-            TotalSalesLine.CalcSums("Amount Including VAT");
-            OutstandingAmount := TotalSalesLine."Amount Including VAT";
-        end;
-
-        exit(OutstandingAmount);
-    end;
 }

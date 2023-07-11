@@ -15,6 +15,7 @@ pageextension 50101 "SalesOrderExt" extends "Sales Order"
                     Promoted = true;
                     PromotedCategory = Process;
                     PromotedIsBig = true;
+                    PromotedOnly = true;
                     Image = Payment;
 
                     trigger OnAction()
@@ -57,6 +58,6 @@ pageextension 50101 "SalesOrderExt" extends "Sales Order"
     trigger OnAfterGetCurrRecord()
     begin
 
-        CalcFields("Amount Including VAT");
+        Rec.CalcFields("Amount Including VAT");
     end;
 }

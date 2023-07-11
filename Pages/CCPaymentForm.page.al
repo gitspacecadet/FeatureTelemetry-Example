@@ -1,7 +1,8 @@
 page 50100 "Payment Form"
 {
     PageType = List;
-    Caption = 'Add CC Payment';
+    Caption = 'Pay with Credit Card';
+
     layout
     {
         area(Content)
@@ -15,12 +16,27 @@ page 50100 "Payment Form"
             {
                 Caption = 'Payment Amount';
                 ApplicationArea = All;
-                trigger OnValidate()
+            }
+        }
+    }
+
+    actions
+    {
+        area(Processing)
+        {
+            action(Pay)
+            {
+                ApplicationArea = All;
+                Caption = 'Pay';
+                Promoted = true;
+                PromotedIsBig = true;
+                Image = Payment;
+
+                trigger OnAction()
                 begin
                     if (PaymentAmount < 1) or (PaymentAmount > OriginalPaymentAmount) then
                         Error(PaymentAmountError);
                 end;
-
             }
         }
     }
@@ -49,26 +65,10 @@ page 50100 "Payment Form"
 
     procedure SetParametersSales(SalesHeaderNo: code[20]; DocType: Enum "Sales Document Type")
     // Sets the default parameters for the page
+    var
+        SalesHeader: Record "Sales Header";
     begin
         SalesHeader.get(DocType, SalesHeaderNo);
-        OriginalPaymentAmount := SquareGetMaxPaymentAmount(SalesHeader);
-    end;
-
-
-    procedure SquareGetMaxPaymentAmount(var Rec: Record "Sales Header"): Decimal
-    // Returns maximum available amount for payment
-    var
-        TotalSalesLine: Record "Sales Line";
-        OutstandingAmount: Decimal;
-    begin
-        // Calculate Sales Document Outstanding Amount
-        TotalSalesLine.SetRange("Document Type", Rec."Document Type");
-        TotalSalesLine.SetRange("Document No.", Rec."No.");
-        if TotalSalesLine.Findset() then begin
-            TotalSalesLine.CalcSums("Amount Including VAT");
-            OutstandingAmount := TotalSalesLine."Amount Including VAT";
-        end;
-
-        exit(OutstandingAmount);
+        OriginalPaymentAmount := SalesHeader.SquareGetMaxPaymentAmount();
     end;
 }

@@ -14,6 +14,7 @@ pageextension 50100 "PostedSalesInvoiceExt" extends "Posted Sales Invoice"
                     Promoted = true;
                     PromotedCategory = Process;
                     PromotedIsBig = true;
+                    PromotedOnly = true;
                     Image = Payment;
 
                     trigger OnAction()
