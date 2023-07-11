@@ -1,4 +1,3 @@
-*.app
 *.flf
 *.bclicense
 *.g.xlf
@@ -7,14 +6,4 @@ Thumbs.db
 TestResults*.xml
 bcptTestResults*.json
 BuildOutput.txt
-rad.json
-.output/
-.dependencies/
-.buildartifacts/
-.alpackages/
-.packages/
-.alcache/
-.altemplates/
-.snapshots/
-cache_*
 ~$*
