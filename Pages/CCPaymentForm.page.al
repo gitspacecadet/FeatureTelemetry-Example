@@ -33,9 +33,44 @@ page 50100 "Payment Form"
                 Image = Payment;
 
                 trigger OnAction()
+                var
+                    CustDimension: Dictionary of [Text, Text];
+                    FeautureTelemetry: Codeunit "Feature Telemetry";
+                    FeatureUptakeStatus: Enum "Feature Uptake Status";
                 begin
-                    if (PaymentAmount < 1) or (PaymentAmount > OriginalPaymentAmount) then
+                    Clear(CustDimension);
+                    if PostedSalInv then begin
+                        FeatureNameCaption := 'Posted Sales Invoice CC Payments';
+                        LogUpateEventID := 'EVT000120';
+
+                    end
+                    else begin
+                        FeatureNameCaption := 'Sales Order CC Payments';
+                        LogUpateEventID := 'EVT000160';
+                    end;
+
+                    FeautureTelemetry.LogUptake(LogUpateEventID, FeatureNameCaption, FeatureUptakeStatus::Used, False, CustDimension);
+
+                    CustDimension.Add('NewOrExistingCard', 'New');
+
+                    if (PaymentAmount < 1) or (PaymentAmount > OriginalPaymentAmount) then begin
+                        if PostedSalInv then
+                            EventID := 'EVT000020'
+                        else
+                            EventID := 'EVT000060';
+
+                        FeautureTelemetry.LogError(EventID, FeatureNameCaption, 'Creating Payment', 'Incorrect Amount', GetLastErrorCallStack, CustDimension);
                         Error(PaymentAmountError);
+                    end
+                    else begin
+                        if PostedSalInv then
+                            EventID := 'EVT000010'
+                        else
+                            EventID := 'EVT000050';
+
+                        FeautureTelemetry.LogUsage(EventID, FeatureNameCaption, 'Payment Created', CustDimension);
+                    end;
+
                 end;
             }
         }
@@ -47,6 +82,10 @@ page 50100 "Payment Form"
         PstSalesInvoice: Record "Sales Invoice Header";
 
         PaymentAmount, OriginalPaymentAmount : Decimal;
+        PostedSalInv: Boolean;
+        FeatureNameCaption: Text;
+        EventID: Text;
+        LogUpateEventID: Text;
 
 
     trigger OnOpenPage()
@@ -59,6 +98,7 @@ page 50100 "Payment Form"
     // Sets the default parameters for the page
     begin
         PstSalesInvoice.get(InvoiceNo);
+        PostedSalInv := true;
         PstSalesInvoice.CalcFields("Remaining Amount");
         OriginalPaymentAmount := PstSalesInvoice."Remaining Amount";
     end;

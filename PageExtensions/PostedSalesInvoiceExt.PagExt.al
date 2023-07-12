@@ -21,7 +21,10 @@ pageextension 50100 "PostedSalesInvoiceExt" extends "Posted Sales Invoice"
                     var
                         PaymentForm: Page "Payment Form";
                     begin
+                        FeautureTelemetry.LogUptake('EVT000110', 'Posted Sales Invoice CC Payments', FeatureUptakeStatus::Discovered, False, CustDimension);
+
                         // Set Page payment amount
+                        Clear(PaymentForm);
                         PaymentForm.SetParameters(Rec."No.");
                         PaymentForm.RunModal();
                     end;
@@ -39,6 +42,8 @@ pageextension 50100 "PostedSalesInvoiceExt" extends "Posted Sales Invoice"
                     var
                         ACHPaymentForm: Page "ACH Payment Form";
                     begin
+                        FeautureTelemetry.LogUptake('EVT000130', 'Posted Sales Invoice ACH Payments', FeatureUptakeStatus::Discovered, False, CustDimension);
+
                         Clear(ACHPaymentForm);
                         // Set Page payment amount
                         ACHPaymentForm.SetParameters(Rec."No.");
@@ -48,4 +53,8 @@ pageextension 50100 "PostedSalesInvoiceExt" extends "Posted Sales Invoice"
             }
         }
     }
+    var
+        FeautureTelemetry: Codeunit "Feature Telemetry";
+        FeatureUptakeStatus: Enum "Feature Uptake Status";
+        CustDimension: Dictionary of [Text, Text];
 }

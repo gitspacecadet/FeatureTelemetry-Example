@@ -22,6 +22,9 @@ pageextension 50101 "SalesOrderExt" extends "Sales Order"
                     var
                         PaymentForm: Page "Payment Form";
                     begin
+                        FeautureTelemetry.LogUptake('EVT000150', 'Sales Order CC Payments', FeatureUptakeStatus::Discovered, False, CustDimension);
+
+                        Clear(PaymentForm);
                         PaymentForm.SetParametersSales(Rec."No.", Rec."Document Type");
                         PaymentForm.RunModal();
                     end;
@@ -39,6 +42,8 @@ pageextension 50101 "SalesOrderExt" extends "Sales Order"
                     var
                         ACHPaymentForm: Page "ACH Payment Form";
                     begin
+                        FeautureTelemetry.LogUptake('EVT000170', 'Sales Order ACH Payments', FeatureUptakeStatus::Discovered, False, CustDimension);
+
                         // Set Page payment amount
                         ACHPaymentForm.SetParametersSalesOrder(Rec."No.", Rec."Document Type");
                         ACHPaymentForm.RunModal();
@@ -47,6 +52,11 @@ pageextension 50101 "SalesOrderExt" extends "Sales Order"
             }
         }
     }
+
+    var
+        FeautureTelemetry: Codeunit "Feature Telemetry";
+        FeatureUptakeStatus: Enum "Feature Uptake Status";
+        CustDimension: Dictionary of [Text, Text];
 
     trigger OnOpenPage()
     var
