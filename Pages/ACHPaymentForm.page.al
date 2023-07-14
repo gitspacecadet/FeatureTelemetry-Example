@@ -56,7 +56,7 @@ page 50101 "ACH Payment Form"
                             EventID := 'EVT000080';
 
                         CustDimension.Add('NewOrExistingCard', 'New');
-                        FeautureTelemetry.LogError(EventID, FeatureNameCaption, 'Creating Payment', 'Incorrect Amount', GetLastErrorCallStack, CustDimension);
+                        FeautureTelemetry.LogError(EventID, FeatureNameCaption, 'Creating Payment', 'Incorrect Amount', PaymentAmountError, CustDimension);
                         Error(PaymentAmountError);
                     end
                     else begin

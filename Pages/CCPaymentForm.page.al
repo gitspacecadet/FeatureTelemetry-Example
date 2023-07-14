@@ -59,7 +59,7 @@ page 50100 "Payment Form"
                         else
                             EventID := 'EVT000060';
 
-                        FeautureTelemetry.LogError(EventID, FeatureNameCaption, 'Creating Payment', 'Incorrect Amount', GetLastErrorCallStack, CustDimension);
+                        FeautureTelemetry.LogError(EventID, FeatureNameCaption, 'Creating Payment', 'Incorrect Amount', PaymentAmountError, CustDimension);
                         Error(PaymentAmountError);
                     end
                     else begin
