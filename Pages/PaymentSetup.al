@@ -86,10 +86,10 @@ page 50103 "Payment Setup"
 
     trigger OnOpenPage()
     begin
-        FeautureTelemetry.LogUptake('EVT000110', 'Posted Sales Invoice CC Payments', FeatureUptakeStatus::Discovered, False, CustDimension);
-        FeautureTelemetry.LogUptake('EVT000130', 'Posted Sales Invoice ACH Payments', FeatureUptakeStatus::Discovered, False, CustDimension);
-        FeautureTelemetry.LogUptake('EVT000150', 'Sales Order CC Payments', FeatureUptakeStatus::Discovered, False, CustDimension);
-        FeautureTelemetry.LogUptake('EVT000170', 'Sales Order ACH Payments', FeatureUptakeStatus::Discovered, False, CustDimension);
+        FeautureTelemetry.LogUptake('EVT000260', 'Payment Setup', FeatureUptakeStatus::Discovered, False, CustDimension);
+        // FeautureTelemetry.LogUptake('EVT000130', 'Posted Sales Invoice ACH Payments', FeatureUptakeStatus::Discovered, False, CustDimension);
+        // FeautureTelemetry.LogUptake('EVT000150', 'Sales Order CC Payments', FeatureUptakeStatus::Discovered, False, CustDimension);
+        // FeautureTelemetry.LogUptake('EVT000170', 'Sales Order ACH Payments', FeatureUptakeStatus::Discovered, False, CustDimension);
 
     end;
 
