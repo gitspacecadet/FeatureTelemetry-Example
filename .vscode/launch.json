@@ -14,7 +14,8 @@
             "enableSqlInformationDebugger": true,
             "enableLongRunningSqlStatements": true,
             "longRunningSqlStatementsThreshold": 500,
-            "numberOfSqlStatements": 10
+            "numberOfSqlStatements": 10,
+            "schemaUpdateMode": 
         },
         {
             "name": "Microsoft cloud sandbox",
