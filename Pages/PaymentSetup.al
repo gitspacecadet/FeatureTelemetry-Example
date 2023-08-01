@@ -14,7 +14,7 @@ page 50103 "Payment Setup"
             {
                 Caption = 'Payment Methods';
 
-                field(EnableCCPaymentsPostedSal; EnableCCPaymentsPostedSal)
+                field("Enable CCPayments PostedSalInv"; Rec."Enable CCPayments PostedSalInv")
                 {
                     ApplicationArea = ALL;
                     Caption = 'Enable CC Payments for Posted Sales Invoices';
@@ -22,7 +22,7 @@ page 50103 "Payment Setup"
                     trigger OnValidate()
                     begin
                         Clear(CustDimension);
-                        if EnableCCPaymentsPostedSal then
+                        if Rec."Enable CCPayments PostedSalInv" then
                             CustDimension.Add('Posted Sal Invoice CC Payment status', 'Enabled')
                         else
                             CustDimension.Add('Posted Sal Invoice CC Payment status', 'Disabled');
@@ -30,7 +30,7 @@ page 50103 "Payment Setup"
                         FeautureTelemetry.LogUptake('EVT000190', 'Posted Sales Invoice CC Payments', FeatureUptakeStatus::Used, false, CustDimension);
                     end;
                 }
-                field(EnableACHPaymentsPostedSal; EnableACHPaymentsPostedSal)
+                field("Enable ACHPayment PostedSalInv"; Rec."Enable ACHPayment PostedSalInv")
                 {
                     ApplicationArea = ALL;
                     Caption = 'Enable ACH Payments for Posted Sales Invoices';
@@ -38,7 +38,7 @@ page 50103 "Payment Setup"
                     trigger OnValidate()
                     begin
                         Clear(CustDimension);
-                        if EnableACHPaymentsPostedSal then
+                        if Rec."Enable ACHPayment PostedSalInv" then
                             CustDimension.Add('Posted Sal Invoice ACH Payment status', 'Enabled')
                         else
                             CustDimension.Add('Posted Sal Invoice ACH Payment status', 'Disabled');
@@ -46,7 +46,7 @@ page 50103 "Payment Setup"
                         FeautureTelemetry.LogUptake('EVT000210', 'Posted Sales Invoice ACH Payments', FeatureUptakeStatus::Used, false, CustDimension);
                     end;
                 }
-                field(EnableCCPaymentsForSales; EnableCCPaymentsForSales)
+                field("Enable CCPayment Sales Orders"; Rec."Enable CCPayment Sales Orders")
                 {
                     ApplicationArea = ALL;
                     Caption = 'Enable CC Payments for Sales Orders';
@@ -54,7 +54,7 @@ page 50103 "Payment Setup"
                     trigger OnValidate()
                     begin
                         Clear(CustDimension);
-                        if EnableCCPaymentsForSales then
+                        if Rec."Enable CCPayment Sales Orders" then
                             CustDimension.Add('Sales Order CC Payment status', 'Enabled')
                         else
                             CustDimension.Add('Sales Order CC Payment status', 'Disabled');
@@ -62,7 +62,7 @@ page 50103 "Payment Setup"
                         FeautureTelemetry.LogUptake('EVT000230', 'Sales Order CC Payments', FeatureUptakeStatus::Used, false, CustDimension);
                     end;
                 }
-                field(EnableACHPaymentsForSales; EnableACHPaymentsForSales)
+                field("Enable ACHPayment Sales Orders"; Rec."Enable ACHPayment Sales Orders")
                 {
                     ApplicationArea = ALL;
                     Caption = 'Enable ACH Payments for Sales Orders';
@@ -70,7 +70,7 @@ page 50103 "Payment Setup"
                     trigger OnValidate()
                     begin
                         Clear(CustDimension);
-                        if EnableACHPaymentsForSales then
+                        if Rec."Enable ACHPayment Sales Orders" then
                             CustDimension.Add('Sales Order ACH Payment status', 'Enabled')
                         else
                             CustDimension.Add('Sales Order ACH Payment status', 'Disabled');
@@ -94,7 +94,6 @@ page 50103 "Payment Setup"
     end;
 
     var
-        EnableCCPaymentsPostedSal, EnableACHPaymentsForSales, EnableACHPaymentsPostedSal, EnableCCPaymentsForSales : Boolean;
         FeautureTelemetry: Codeunit "Feature Telemetry";
         FeatureUptakeStatus: Enum "Feature Uptake Status";
         CustDimension: Dictionary of [Text, Text];

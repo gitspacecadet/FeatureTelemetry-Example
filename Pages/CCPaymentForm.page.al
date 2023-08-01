@@ -26,10 +26,11 @@ page 50100 "Payment Form"
         {
             action(Pay)
             {
-                ApplicationArea = All;
                 Caption = 'Pay';
                 Promoted = true;
+                PromotedCategory = Process;
                 PromotedIsBig = true;
+                ApplicationArea = All;
                 Image = Payment;
 
                 trigger OnAction()

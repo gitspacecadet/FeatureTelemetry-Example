@@ -28,6 +28,7 @@ page 50101 "ACH Payment Form"
                 ApplicationArea = All;
                 Caption = 'Pay';
                 Promoted = true;
+                PromotedCategory = Process;
                 PromotedIsBig = true;
                 Image = Payment;
 
