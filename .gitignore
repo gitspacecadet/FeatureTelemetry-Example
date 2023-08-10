@@ -6,4 +6,11 @@ Thumbs.db
 TestResults*.xml
 bcptTestResults*.json
 BuildOutput.txt
+.output/
+.dependencies/
+.buildartifacts/
+.packages/
+.altemplates/
+.snapshots/
+cache_*
 ~$*

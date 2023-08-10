@@ -27,7 +27,7 @@ page 50103 "Payment Setup"
                         else
                             CustDimension.Add('Posted Sal Invoice CC Payment status', 'Disabled');
 
-                        FeautureTelemetry.LogUptake('EVT000190', 'Posted Sales Invoice CC Payments', FeatureUptakeStatus::Used, false, CustDimension);
+                        FeautureTelemetry.LogUptake('EVT000190', 'Posted Sales Invoice CC Payments', FeatureUptakeStatus::"Set up", false, CustDimension);
                     end;
                 }
                 field("Enable ACHPayment PostedSalInv"; Rec."Enable ACHPayment PostedSalInv")
@@ -43,7 +43,7 @@ page 50103 "Payment Setup"
                         else
                             CustDimension.Add('Posted Sal Invoice ACH Payment status', 'Disabled');
 
-                        FeautureTelemetry.LogUptake('EVT000210', 'Posted Sales Invoice ACH Payments', FeatureUptakeStatus::Used, false, CustDimension);
+                        FeautureTelemetry.LogUptake('EVT000210', 'Posted Sales Invoice ACH Payments', FeatureUptakeStatus::"Set up", false, CustDimension);
                     end;
                 }
                 field("Enable CCPayment Sales Orders"; Rec."Enable CCPayment Sales Orders")
@@ -59,7 +59,7 @@ page 50103 "Payment Setup"
                         else
                             CustDimension.Add('Sales Order CC Payment status', 'Disabled');
 
-                        FeautureTelemetry.LogUptake('EVT000230', 'Sales Order CC Payments', FeatureUptakeStatus::Used, false, CustDimension);
+                        FeautureTelemetry.LogUptake('EVT000230', 'Sales Order CC Payments', FeatureUptakeStatus::"Set up", false, CustDimension);
                     end;
                 }
                 field("Enable ACHPayment Sales Orders"; Rec."Enable ACHPayment Sales Orders")
@@ -75,7 +75,7 @@ page 50103 "Payment Setup"
                         else
                             CustDimension.Add('Sales Order ACH Payment status', 'Disabled');
 
-                        FeautureTelemetry.LogUptake('EVT000250', 'Sales Order ACH Payments', FeatureUptakeStatus::Used, false, CustDimension);
+                        FeautureTelemetry.LogUptake('EVT000250', 'Sales Order ACH Payments', FeatureUptakeStatus::"Set up", false, CustDimension);
                     end;
                 }
             }
