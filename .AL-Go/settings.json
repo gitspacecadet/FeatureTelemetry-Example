@@ -1,0 +1,10 @@
+{
+  "country": "ae",
+  "appSourceCopMandatoryAffixes": [],
+  "appFolders": [
+    "BaseApp"
+  ],
+  "testFolders": [],
+  "bcptTestFolders": [],
+  "repoVersion": "1.0"
+}

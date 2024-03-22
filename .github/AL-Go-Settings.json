@@ -1,0 +1,36 @@
+{
+  "type": "PTE",
+  "templateUrl": "https://github.com/microsoft/AL-Go-PTE@main",
+  "nextMajorSchedule": "0 1 * * 7",
+  "nextMinorSchedule": "0 1 * * 7",
+  "environments": [
+    "BC23W1",
+    "BC24W1"
+  ],
+  "DeployToBC23W1": {
+    "EnvironmentType": "SaaS",
+    "EnvironmentName": "BC23W1",
+    "Branches": [
+      "main"
+    ],
+    "ContinuousDeployment": true,
+    "companyId": "f1a13d54-c32f-ee11-bdfb-6045bdc8a7d3",
+    "runs-on": "windows-latest"
+  },
+  "BC23W1_AuthContextSecretName": "BC23W1_AuthContext",
+  "excludeEnvironments": [
+    "Sandbox1",
+    "Sandbox2",
+    "Sandbox3"
+  ],
+  "fullBuildPatterns": [
+    "BaseApp/*"
+  ],
+  "skipUpgrade": true,
+  "useProjectDependencies": true,
+  "useGitHubPackagesForDependencies": true,
+  "doNotRunBcptTests": false,
+  "doNotRunTests": true,
+  "useCompilerFolder": true,
+  "doNotPublishApps": true
+}
