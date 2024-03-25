@@ -15,7 +15,7 @@
             "enableLongRunningSqlStatements": true,
             "longRunningSqlStatementsThreshold": 500,
             "numberOfSqlStatements": 10,
-            "schemaUpdateMode": 
+            "schemaUpdateMode": "ForceSync"
         },
         {
             "name": "Microsoft cloud sandbox",
