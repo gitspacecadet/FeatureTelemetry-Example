@@ -16,6 +16,8 @@ rad.json
 .alcache/
 .altemplates/
 .snapshots/
+launch.json
+.vscode/
 cache_*
 ~$*
-.AL-Go\aadapp.ps1
+.AL-Go/aadapp.ps1
