@@ -18,4 +18,4 @@ rad.json
 .snapshots/
 cache_*
 ~$*
-.AL-Go/aadapp.ps1
+.AL-Go\aadapp.ps1
