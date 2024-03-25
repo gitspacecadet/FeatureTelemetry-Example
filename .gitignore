@@ -1,6 +1,7 @@
 *.app
 *.flf
 *.bclicense
+*.code-workspace
 *.g.xlf
 .DS_Store
 Thumbs.db
